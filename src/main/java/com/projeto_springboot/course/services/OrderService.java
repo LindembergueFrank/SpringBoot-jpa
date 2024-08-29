@@ -19,7 +19,7 @@ public class OrderService {
 		return repository.findAll();
 	}
 	
-	public Order findById(Integer id) {
+	public Order findById(Long id) {
 		Optional<Order> usr = repository.findById(id);
 		return usr.get();
 	}
