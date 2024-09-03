@@ -3,7 +3,7 @@
 ## Funcionalidade Principal
 
 Este projeto consiste na criação de um sistema web de gerenciamento de pedidos e produtos, utilizando Spring Boot, JPA/Hibernate, e um banco de dados em memória H2. As funcionalidades principais incluem a criação, leitura, atualização e exclusão (CRUD) de entidades como usuários, pedidos, categorias e produtos. O projeto também inclui o tratamento de exceções e a persistência de dados em um banco de dados relacional.
-
+ 
 ## Referências
 
 Este projeto foi realizado de acordo com a apresentação no curso de [Java OO - Nélio Alves](https://www.udemy.com/course/java-curso-completo/?couponCode=SEPTSTACK24B)
