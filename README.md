@@ -1,126 +1,78 @@
-# Projeto Web Services com Spring Boot e JPA / Hibernate
+# Web Services com Spring Boot e JPA/Hibernate
 
-## Funcionalidade Principal
+Projeto de estudo dedicado aos fundamentos de uma API REST com **Java, Spring Boot, JPA/Hibernate e banco relacional**.
 
-Este projeto consiste na criação de um sistema web de gerenciamento de pedidos e produtos, utilizando Spring Boot, JPA/Hibernate, e um banco de dados em memória H2. As funcionalidades principais incluem a criação, leitura, atualização e exclusão (CRUD) de entidades como usuários, pedidos, categorias e produtos. O projeto também inclui o tratamento de exceções e a persistência de dados em um banco de dados relacional.
- 
-## Referências
+> **Contexto:** este repositório foi desenvolvido como parte do curso *Java COMPLETO — Programação Orientada a Objetos + Projetos*, de Nélio Alves. Ele é mantido publicamente como registro de aprendizado e não é apresentado como projeto autoral de produção.
 
-Este projeto foi realizado de acordo com a apresentação no curso de [Java OO - Nélio Alves](https://www.udemy.com/course/java-curso-completo/?couponCode=SEPTSTACK24B)
+## O que o projeto demonstra
 
-## Estrutura do Projeto
+- modelagem de entidades JPA e relacionamentos;
+- arquitetura tradicional em camadas (`resource/controller`, `service`, `repository` e `entity`);
+- operações CRUD;
+- associações entre usuários, pedidos, produtos, categorias, itens e pagamentos;
+- tratamento de exceções de recurso e banco;
+- configuração de perfil de teste e carga inicial de dados;
+- construção de uma API REST com Spring Boot.
 
-### 1. **Entidades (Entities)**
+## Domínio
 
-- **`User`**
-  - Atributos: `id`, `name`, `email`, `phone`, `password`
-  - Função: Representa um usuário do sistema.
+O modelo representa um fluxo simplificado de e-commerce:
 
-- **`Order`**
-  - Atributos: `id`, `moment`, `orderStatus`, `user`
-  - Função: Representa um pedido realizado por um usuário.
+- `User` — usuário do sistema;
+- `Order` — pedido associado a um usuário;
+- `Category` — categoria de produtos;
+- `Product` — produto;
+- `OrderItem` — item de pedido com chave composta;
+- `Payment` — pagamento associado ao pedido.
 
-- **`Category`**
-  - Atributos: `id`, `name`
-  - Função: Representa uma categoria de produtos.
+Os diagramas disponíveis em `DER/` documentam as relações principais do domínio.
 
-- **`Product`**
-  - Atributos: `id`, `name`, `description`, `price`, `imgUrl`
-  - Função: Representa um produto disponível para compra.
+## Estrutura
 
-- **`OrderItem`**
-  - Atributos: `id`, `quantity`, `price`, `subTotal`
-  - Função: Representa um item de um pedido, com quantidade e preço do produto.
+```text
+src/main/java/
+├── entities/
+├── repositories/
+├── resources/
+├── services/
+└── config/
+```
 
-- **`OrderItemPK`**
-  - Atributos: `order`, `product`
-  - Função: Chave composta para a entidade `OrderItem`.
+A nomenclatura real dos pacotes pode variar conforme a etapa do curso preservada no histórico.
 
-- **`Payment`**
-  - Atributos: `id`, `moment`, `order`
-  - Função: Representa um pagamento associado a um pedido.
+## Executando
 
-### 2. **Repositórios (Repositories)**
+Pré-requisitos:
 
-- **`UserRepository`**
-  - Extende: `JpaRepository<User, Long>`
-  - Função: Responsável por operações de CRUD da entidade `User`.
+- JDK compatível com a versão definida no `pom.xml`;
+- Maven ou Maven Wrapper.
 
-- **`OrderRepository`**
-  - Extende: `JpaRepository<Order, Long>`
-  - Função: Responsável por operações de CRUD da entidade `Order`.
+Execute os testes/build com:
 
-- **`CategoryRepository`**
-  - Extende: `JpaRepository<Category, Long>`
-  - Função: Responsável por operações de CRUD da entidade `Category`.
+```bash
+./mvnw test
+```
 
-- **`ProductRepository`**
-  - Extende: `JpaRepository<Product, Long>`
-  - Função: Responsável por operações de CRUD da entidade `Product`.
+Inicie a aplicação com:
 
-- **`OrderItemRepository`**
-  - Extende: `JpaRepository<OrderItem, Long>`
-  - Função: Responsável por operações de CRUD da entidade `OrderItem`.
+```bash
+./mvnw spring-boot:run
+```
 
-### 3. **Serviços (Services)**
+Consulte os arquivos `application.properties` do projeto para os perfis e configurações disponíveis.
 
-- **`UserService`**
-  - Função: Implementa a lógica de negócio para as operações relacionadas a `User`, como inserção, atualização, e exclusão de usuários, além de buscar usuários por ID.
+## Higiene do repositório
 
-- **`OrderService`**
-  - Função: Implementa a lógica de negócio para as operações relacionadas a `Order`.
+Arquivos gerados de build e metadados específicos de IDE não são versionados. O `.gitignore` cobre `target/`, Eclipse/STS, IntelliJ, VS Code e arquivos locais de ambiente.
 
-- **`CategoryService`**
-  - Função: Implementa a lógica de negócio para as operações relacionadas a `Category`.
+## Referência
 
-- **`ProductService`**
-  - Função: Implementa a lógica de negócio para as operações relacionadas a `Product`.
+- Nélio Alves — *Java COMPLETO: Programação Orientada a Objetos + Projetos*.
 
-### 4. **Recursos (Resources / Controllers)**
+## Papel no portfólio
 
-- **`UserResource`**
-  - Função: Controla as requisições HTTP relacionadas a `User`, como criar, ler, atualizar e deletar usuários.
+Este repositório registra uma etapa importante da formação em Spring/JPA. Projetos autorais mais recentes devem ser usados como evidência principal de engenharia, arquitetura, segurança, testes e decisões de produção.
 
-- **`OrderResource`**
-  - Função: Controla as requisições HTTP relacionadas a `Order`.
+## Autor
 
-- **`CategoryResource`**
-  - Função: Controla as requisições HTTP relacionadas a `Category`.
-
-- **`ProductResource`**
-  - Função: Controla as requisições HTTP relacionadas a `Product`.
-
-### 5. **Tratamento de Exceções (Exceptions Handling)**
-
-- **`ResourceNotFoundException`**
-  - Função: Exceção personalizada para quando um recurso não é encontrado.
-
-- **`DatabaseException`**
-  - Função: Exceção personalizada para erros de integridade referencial no banco de dados.
-
-- **`StandardError`**
-  - Função: Estrutura padrão para respostas de erro.
-
-- **`ResourceExceptionHandler`**
-  - Função: Controla as exceções lançadas nos serviços e converte para respostas HTTP apropriadas.
-
-### 6. **Configuração e Seed de Banco de Dados**
-
-- **`TestConfig`**
-  - Função: Configura o perfil de teste, popula o banco de dados com dados iniciais para testes.
-
-## Dependências e Configurações
-
-- **Dependências Maven**:
-  - `spring-boot-starter-web`
-  - `spring-boot-starter-data-jpa`
-  - `h2`
-
-- **Configurações**:
-  - `application.properties` e `application-test.properties` para definir o banco de dados H2 e o comportamento do JPA.
-
-## Testes e Desenvolvimento
-
-- Testes de CRUD e tratamento de exceções para `User`, utilizando os serviços e recursos implementados.
-- A aplicação pode ser testada usando o H2 Console ou através de requisições HTTP (via Postman ou cURL).
-
+**Lindembergue Frank**

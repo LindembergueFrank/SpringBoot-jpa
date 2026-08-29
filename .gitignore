@@ -1,0 +1,24 @@
+target/
+
+### Eclipse / STS ###
+.classpath
+.project
+.settings/
+.apt_generated/
+.factorypath
+.springBeans
+.sts4-cache/
+
+### IntelliJ IDEA ###
+.idea/
+*.iml
+*.iws
+*.ipr
+
+### VS Code ###
+.vscode/
+
+### Environment ###
+.env
+.env.*
+!.env.example
